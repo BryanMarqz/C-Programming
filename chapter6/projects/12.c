@@ -3,7 +3,7 @@
 int main(void)
 {
 	int n, i;
-	float e = 1.0f, prev_term = 1.0f;
+	float e = 1.0f, prev_term = 1.0f, eps;
 
 	printf("Enter an integer: ");
 	scanf("%d", &n);
