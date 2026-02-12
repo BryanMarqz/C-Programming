@@ -1,15 +1,31 @@
 #include <stdio.h>
+#include <ctype.h>
+
 #define MINUTES 60
 
 int main(void)
 {
 	int hour, min, my_time;
+	char ch;
 
-	printf("Enter 24-hour time: ");
-	scanf("%d :%d", &hour, &min);
-
-	my_time = hour * MINUTES + min;	
-
+	printf("Enter 12-hour time followed by AM or PM: ");
+	scanf("%d :%d %c", &hour, &min, &ch);
+	
+	if(toupper(ch) == 'A')
+	{
+		if(hour == 12)
+			my_time = (hour = 0) * MINUTES + min;	
+		else
+			my_time = hour * MINUTES + min;
+	}
+	else
+	{
+		if(hour == 12)
+			my_time = (hour) * MINUTES + min;	
+		else
+			my_time = (12 + hour) * MINUTES + min;
+	}
+	
 	if (my_time <= (480 + 583) / 2)
 	{
 		// 8:00 a.m. - 10:16 a.m.
