@@ -3,11 +3,12 @@
 
 #include <stdio.h>
 
-#define SIZE 10
+#define SIZE (int) (sizeof(a) / sizeof(a[0]))
 
 int main(void)
 {
-  int a[SIZE], i;
+  int a[SIZE];
+  int i;
 
   printf("Enter %d numbers: ", SIZE);
   for (i = 0; i < SIZE; i++)
