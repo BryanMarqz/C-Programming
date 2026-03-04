@@ -8,15 +8,42 @@
 int main(void)
 {
 	char message[N];
-	int i;
+	int i = 0;
 
 	printf("Enter message: ");
-	for(i = 0; (message[i] = getchar()) == '\n'; i++);
-
-	getchar();	
-
-	while(getchar(message[i]) == '\n')
-		putchar(message[i++]);
+	while((message[i] = getchar()) != '\n')
+	{
+		if(i == 0)
+			printf("In B1FF-speak: ");
+	
+		switch(toupper(message[i]))
+		{
+			case 'A':
+				putchar('4');
+				break;
+			case 'B':
+				putchar('8');
+				break;
+			case 'E':
+				putchar('3');
+				break;
+			case 'I':
+				putchar('1');
+				break;
+			case 'O':
+				putchar('0');
+				break;
+			case 'S':
+				putchar('5');
+				break;
+			default:
+				putchar(toupper(message[i]));
+				break;
+		}
+		i++;
+	}
+	
+	printf("!!!!!!!!!!\n");	
 
 	return 0;
 }
