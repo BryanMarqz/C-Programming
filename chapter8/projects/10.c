@@ -5,7 +5,10 @@ int main(void) {
     int user_time,
         hour,
         minute,
-        d1 = 480,
+        departure[] = {480, 583, 679, 767, 840, 945, 1140, 1305}; 
+	arrival[] = {616, 712, 811, 900, 968, 1075, 1280, 1438};
+	/*	
+	d1 = 480,
         d2 = 583,
         d3 = 679,
         d4 = 767,
@@ -13,6 +16,7 @@ int main(void) {
         d6 = 945,
         d7 = 1140,
         d8 = 1305;
+	*/
 
     printf("Enter a 24-hour time: ");
     scanf("%d :%d", &hour, &minute);
