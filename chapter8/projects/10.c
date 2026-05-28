@@ -1,45 +1,34 @@
 #include <stdio.h>
 
-int main(void) {
+#define N 8
 
-    int user_time,
-        hour,
-        minute,
-        departure[] = {480, 583, 679, 767, 840, 945, 1140, 1305}; 
-	arrival[] = {616, 712, 811, 900, 968, 1075, 1280, 1438};
-	/*	
-	d1 = 480,
-        d2 = 583,
-        d3 = 679,
-        d4 = 767,
-        d5 = 840,
-        d6 = 945,
-        d7 = 1140,
-        d8 = 1305;
-	*/
+int main(void)
+{
+    int user_time, hour, minute, closest, i, diff_min, diff;
+    int departure[] = {480, 583, 679, 767, 840, 945, 1140, 1305};
 
     printf("Enter a 24-hour time: ");
-    scanf("%d :%d", &hour, &minute);
+    scanf("%d:%d", &hour, &minute);
     user_time = hour * 60 + minute;
+    closest = 0;
 
-    printf("Closest departure time is ");
+    diff_min = user_time - departure[0];
+    if(diff_min < 0)
+        diff_min = -diff_min;
 
-    if (user_time <= d1 + (d2 - d1) / 2)
-        printf("8:00 a.m., arriving at 10:16 a.m.\n");
-    else if (user_time < d2 + (d3 - d2) / 2)
-        printf("9:43 a.m., arriving at 11:52 a.m.\n");
-    else if (user_time < d3 + (d4 - d3) / 2)
-        printf("11:19 a.m., arriving at 1:31 p.m.\n");
-    else if (user_time < d4 + (d5 - d4) / 2)
-        printf("12:47 p.m., arriving at 3:00 p.m.\n");
-    else if (user_time < d5 + (d6 - d5) / 2)
-        printf("2:00 p.m., arriving at 4:08 p.m.\n");
-    else if (user_time < d6 + (d7 - d6) / 2)
-        printf("3:45 p.m., arriving at 5:55 p.m.\n");
-    else if (user_time < d7 + (d8 - d7) / 2)
-        printf("7:00 p.m., arriving at 9:20 p.m.\n");
-    else
-        printf("9:45 p.m., arriving at 11:58 p.m.\n");
+    for(i = 1; i < N; i++)
+    {
+        diff = user_time - departure[i];
+        if(diff < 0)
+            diff = -diff;
+        if(diff < diff_min)
+        {
+            diff_min = diff;
+            closest = i;
+        }
+    }
+    
+    printf("Closest depature time is: %2.2d:%2.2d\n", departure[closest] / 60, departure[closest] % 60);
 
     return 0;
 }
