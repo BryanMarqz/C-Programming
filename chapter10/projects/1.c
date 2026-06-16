@@ -11,9 +11,10 @@ void make_empty(void);
 bool is_empty(void);
 bool is_full(void);
 void push(char i);
-void pop(void);
+char pop(void);
 void stack_overflow(void);
 void stack_underflow(void);	
+void missing(void);
 
 int main(void)
 {
@@ -23,9 +24,30 @@ int main(void)
 	
 	while((ch = getchar()) != '\n')
 	{
+		if(ch == '}' && pop() != '{')
+		{
+			missing();			
+		}	
+		else if(ch == ')' && pop() != '(')
+		{
+			missing();	
+		}
+		else if(ch == '(' || ch == '{')
+		{
+			push(ch);
+		}
+		
+	}
 	
-	
-	return 0;
+	if(ch == '\n' && is_empty())
+	{
+		printf("Parentheses/braces are nested properly\n");
+		return 0;
+	}
+	else
+	{
+		missing();
+	}
 }
 
 void make_empty(void)
@@ -35,7 +57,7 @@ void make_empty(void)
 
 bool is_empty(void)
 {
-	return top == '\0';
+	return top == 0;
 }
 
 bool is_full(void)
@@ -51,7 +73,7 @@ void push(char i)
 		contents[top++] = i;
 }
 
-void pop(void)
+char pop(void)
 {
 	if(is_empty())
 		stack_underflow();
@@ -61,16 +83,18 @@ void pop(void)
 
 void stack_overflow()
 {
-	printf("Segmentation fault, you exceeded the size of the stack.");
+	printf("Stack overflow\n");
 	exit(EXIT_FAILURE);
 }
 
 void stack_underflow()
 {
-	printf("Segmentation fault, you went under the amount allocated on the stack.");
+	printf("The parentheses/braces aren't matched.\n");
 	exit(EXIT_FAILURE);
+}
 
 void missing(void)
 {
-	printf("The parentheses/braces aren't nested properly.");
+	printf("Missing braces or parenthesis.\n");
+	exit(EXIT_FAILURE);
 }
